@@ -27,7 +27,7 @@ function NavBar() {
             <Nav.Link href='/home'>Home</Nav.Link>
             <Button variant='warning' onClick={handleLogout}>
               LOGOUT
-            </Button>{' '}
+            </Button>
           </Nav>
         </Navbar.Collapse>
       </Container>
