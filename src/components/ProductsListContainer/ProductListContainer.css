@@ -1,0 +1,7 @@
+.list_container{
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    padding: 1em;
+  }

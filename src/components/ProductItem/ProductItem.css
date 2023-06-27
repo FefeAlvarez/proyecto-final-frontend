@@ -1,0 +1,9 @@
+.card_container {
+  border: 1px solid black;
+  max-width: 300px;
+}
+.card_img{
+    height: 200px;
+    width: 300px;
+  
+}
