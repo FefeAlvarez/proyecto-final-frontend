@@ -20,18 +20,18 @@ const Registro = () => {
         password
       });
 
-      console.log(response.data); // Handle the server response as needed
+      console.log(response.data); 
 
-      // Clear the form fields after a successful registration
+
       setName('');
       setEmail('');
       setPassword('');
 
-      // Redirect to http://localhost:3000/ after a successful registration
+    
       window.location.href = 'http://localhost:3000/';
     } catch (error) {
       console.error(error);
-      // Handle the error as needed
+  
     }
   };
 
