@@ -14,6 +14,9 @@ const Registro = () => {
     e.preventDefault();
 
     try {
+console.log("esto manda ",name,email,password);
+
+
       const response = await axios.post('http://localhost:8080/api/users/register', {
         name,
         email,
