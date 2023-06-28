@@ -14,14 +14,20 @@ const ProductItemDetail = ({ product }) => {
   const [toggleEdited, setToggleEdited] = useState(false);
   const editProduct = async (id) => {
     try {
+      const token = localStorage.getItem('token');
       const response = await axios.put(
         `http://localhost:8080/api/products/${id}`,
-        formData
-        );
-      
+        formData,
+        {
+          headers: {
+            Authorization: `Bearer ${token}`
+          }
+        }
+      );
+
       if (response.status === 200) {
         const updatedProduct = response.data;
-        
+
         setFormData({
           ...formData,
           title: updatedProduct.title,

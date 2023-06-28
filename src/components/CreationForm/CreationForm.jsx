@@ -21,12 +21,16 @@ const CreationForm = () => {
     e.preventDefault();
 
     try {
+      const token = localStorage.getItem('token');
       const response = await axios.post(
         'http://localhost:8080/api/products',
-        formData
+        formData,
+        {
+          headers: { Authorization: `Bearer ${token}` }
+        }
       );
       if (response.status === 500) {
-        return(<div>DEBES SER ADMIN</div>)
+        return <div>DEBES SER ADMIN</div>;
       }
       if (response.status === 200) {
         console.log('Producto creado exitosamente');

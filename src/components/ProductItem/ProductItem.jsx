@@ -15,11 +15,13 @@ const ProductItem = ({ product }) => {
 
   const deleteProduct = async (id) => {
     try {
+      const token = localStorage.getItem('token');
       const response = await axios.delete(
-        `http://localhost:8080/api/products/${id}`
+        `http://localhost:8080/api/products/${id}`,
+        { headers: { Authorization: `Bearer ${token}` } }
       );
       if (response.status === 500) {
-        return(<div>DEBES SER ADMIN</div>)
+        return <div>DEBES SER ADMIN</div>;
       }
       if (response.status === 200) {
         setDeletedItem(true);
@@ -59,30 +61,27 @@ const ProductItem = ({ product }) => {
       </Card.Body>
     </Card>
   ) : (
-    
-      <Row>
-        <Col xs={6}>
-          <Toast
-            bg='danger'
-            onClose={() => setShow(false)}
-            show={show}
-            delay={3000}
-            autohide
-          >
-            <Toast.Header>
-              <img
-                src='holder.js/20x20?text=%20'
-                className='rounded me-2'
-                alt=''
-              />
-              <strong className='me-auto'>DELETE</strong>
-            </Toast.Header>
-            <Toast.Body>El producto se ha eliminado correctamente!</Toast.Body>
-          </Toast>
-        </Col>
-      </Row>
-      
-    
+    <Row>
+      <Col xs={6}>
+        <Toast
+          bg='danger'
+          onClose={() => setShow(false)}
+          show={show}
+          delay={3000}
+          autohide
+        >
+          <Toast.Header>
+            <img
+              src='holder.js/20x20?text=%20'
+              className='rounded me-2'
+              alt=''
+            />
+            <strong className='me-auto'>DELETE</strong>
+          </Toast.Header>
+          <Toast.Body>El producto se ha eliminado correctamente!</Toast.Body>
+        </Toast>
+      </Col>
+    </Row>
   );
 };
 export default ProductItem;

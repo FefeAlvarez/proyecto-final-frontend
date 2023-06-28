@@ -3,6 +3,7 @@ import { urlGetContent } from '../../services/urls';
 import axios from 'axios';
 import ProductList from '../ProductList/ProductList';
 import "./ProductListContainer.css"
+
 const ProductsContainer = () => {
   const [error, setError] = useState({
     error: false,
@@ -14,7 +15,13 @@ const ProductsContainer = () => {
   useEffect(() => {
     const getProducts = async () => {
       try {
-        const response = await axios.get(urlGetContent);
+        const token = localStorage.getItem('token'); 
+        
+        const response = await axios.get(urlGetContent, {
+          headers: {
+            Authorization: `Bearer ${token}` 
+          }
+        });
         const { data } = response.data;
         if (response.status === 200) {
           setProducts(data);
@@ -29,6 +36,7 @@ const ProductsContainer = () => {
     };
     getProducts();
   }, []);
+
   return (
     <div className='list_container'>
       <ProductList products={products} error={error} />

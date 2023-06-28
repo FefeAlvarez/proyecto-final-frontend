@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
-
 import axios from 'axios';
 import { urlApiLogin } from '../../services/urls';
+import { useNavigate } from 'react-router-dom';
 
 const Login = () => {
   const [form, setForm] = useState({
@@ -13,6 +13,7 @@ const Login = () => {
     errorCode: '',
     errorMsg: ''
   });
+  const navigate = useNavigate();
 
   const submitChange = (event) => {
     setForm({
@@ -29,9 +30,10 @@ const Login = () => {
   const login = async () => {
     try {
       const response = await axios.post(urlApiLogin, form);
-      console.log(response);
+      const token = response.data.data.token
       if (response.status === 200) {
-        window.location.href = '/home';
+        localStorage.setItem('token', token);
+        navigate('/home'); 
       }
     } catch (error) {
       setError({

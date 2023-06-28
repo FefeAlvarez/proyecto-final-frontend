@@ -10,7 +10,12 @@ const ItemDetailContainer = () => {
   useEffect(() => {
     const getItem = async () => {
       try {
-        const response = await axios.get(`${urlGetContent}/${id}`);
+        const token = localStorage.getItem('token');
+        const response = await axios.get(`${urlGetContent}/${id}`, {
+          headers: {
+            Authorization: `Bearer ${token}`
+          }
+        });
         const {
           data: { data }
         } = response;
@@ -21,11 +26,6 @@ const ItemDetailContainer = () => {
     };
     getItem();
   }, [id]);
-  return (
-    <ProductItemDetail
-    
-      product={productDetails}
-    />
-  );
+  return <ProductItemDetail product={productDetails} />;
 };
 export default ItemDetailContainer;

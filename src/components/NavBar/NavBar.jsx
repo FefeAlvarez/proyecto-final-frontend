@@ -9,6 +9,7 @@ function handleLogout() {
     .post('http://localhost:8080/api/users/logout')
     .then((response) => {
       const redirectUrl = response.data.redirectUrl;
+      localStorage.removeItem('token');
       window.location.href = redirectUrl; 
     })
     .catch((error) => {
